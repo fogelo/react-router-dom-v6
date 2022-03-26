@@ -12,7 +12,10 @@ function App() {
             {/*<Lesson2/>*/}
             <hr/>
             <h2>3</h2>
-            <Lesson3/>
+            {/*<Lesson3/>*/}
+            <hr/>
+            <h2>4</h2>
+            <Lesson4/>
         </div>
     );
 }
@@ -103,7 +106,7 @@ function Lesson3() {
 }
 
 function Profile() {
-    const params = useParams<'x'|'y'>()
+    const params = useParams<'x' | 'y'>()
     const some = params
     console.log(some)
     return (
@@ -113,3 +116,19 @@ function Profile() {
     )
 }
 
+
+function Lesson4() {
+    return (
+        <div>
+            <NavLink to={'/'}>main </NavLink>
+            {/*<NavLink to={'/login'} className={'def'}>login </NavLink>*/}
+            <NavLink to={'/login'} className={(params) => params.isActive ? 'act' : 'def'}>login </NavLink>
+
+            {/*<NavLink to={'/profile'} style={{color: 'lime'}}>profile </NavLink>*/}
+            <NavLink to={'/profile'} style={(params) => {
+                return {color: params.isActive ? 'lime' : 'black'}
+            }}>profile </NavLink>
+            <NavLink to={'/profile/settings'}>settings </NavLink>
+        </div>
+    )
+}
