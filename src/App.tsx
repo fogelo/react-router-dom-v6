@@ -1,10 +1,27 @@
 import React from 'react';
 import './App.css';
-import {NavLink, Route, Routes, Outlet} from 'react-router-dom';
+import {NavLink, Route, Routes, Outlet, useParams} from 'react-router-dom';
 
 function App() {
     return (
         <div className="App">
+            <h2>1</h2>
+            {/*<Lesson1/>*/}
+            <hr/>
+            <h2>2</h2>
+            {/*<Lesson2/>*/}
+            <hr/>
+            <h2>3</h2>
+            <Lesson3/>
+        </div>
+    );
+}
+
+export default App;
+
+function Lesson1() {
+    return (
+        <div>
             <NavLink to={'/'}>main </NavLink>
             <NavLink to={'/login'}>login </NavLink>
             <NavLink to={'/profile'}>profile </NavLink>
@@ -17,9 +34,13 @@ function App() {
                 <Route path={'/profile'} element={<div>profile</div>}/>
                 <Route path={'/profile/settings'} element={<div>settings</div>}/>
             </Routes>
+        </div>
+    )
+}
 
-
-            <hr/>
+function Lesson2() {
+    return (
+        <div>
             {/*демонстрация вложенности №1*/}
             <Routes>
                 <Route path={'/*'} element={<div>404</div>}/>
@@ -60,7 +81,35 @@ function App() {
                 </Route>
             </Routes>
         </div>
-    );
+    )
 }
 
-export default App;
+function Lesson3() {
+    return (
+        <div>
+            <NavLink to={'/'}>main </NavLink>
+            <NavLink to={'/login'}>login </NavLink>
+            <NavLink to={'/profile'}>profile </NavLink>
+            <NavLink to={'/profile/1'}>profile/1 </NavLink>
+
+            <Routes>
+                <Route path={'/*'} element={<div>404</div>}/>
+                <Route path={'/'} element={<div>main</div>}/>
+                <Route path={'/login'} element={<div>login</div>}/>
+                <Route path={'/profile/:x/:y'} element={<Profile/>}/>
+            </Routes>
+        </div>
+    )
+}
+
+function Profile() {
+    const params = useParams<'x'|'y'>()
+    const some = params
+    console.log(some)
+    return (
+        <div>
+            profile
+        </div>
+    )
+}
+
