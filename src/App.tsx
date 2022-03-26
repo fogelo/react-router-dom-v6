@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './App.css';
-import {NavLink, Route, Routes, Outlet, useParams} from 'react-router-dom';
+import {NavLink, Route, Routes, Outlet, useParams, useNavigate, Navigate} from 'react-router-dom';
 
 function App() {
     return (
@@ -15,7 +15,10 @@ function App() {
             {/*<Lesson3/>*/}
             <hr/>
             <h2>4</h2>
-            <Lesson4/>
+            {/*<Lesson4/>*/}
+            <hr/>
+            <h2>4</h2>
+            <Lesson5/>
         </div>
     );
 }
@@ -99,13 +102,13 @@ function Lesson3() {
                 <Route path={'/*'} element={<div>404</div>}/>
                 <Route path={'/'} element={<div>main</div>}/>
                 <Route path={'/login'} element={<div>login</div>}/>
-                <Route path={'/profile/:x/:y'} element={<Profile/>}/>
+                <Route path={'/profile/:x/:y'} element={<Profile3/>}/>
             </Routes>
         </div>
     )
 }
 
-function Profile() {
+function Profile3() {
     const params = useParams<'x' | 'y'>()
     const some = params
     console.log(some)
@@ -129,6 +132,46 @@ function Lesson4() {
                 return {color: params.isActive ? 'lime' : 'black'}
             }}>profile </NavLink>
             <NavLink to={'/profile/settings'}>settings </NavLink>
+        </div>
+    )
+}
+
+function Lesson5() {
+    return (
+        <div>
+            <NavLink to={'/'}>main </NavLink>
+            <NavLink to={'/login'}>login </NavLink>
+            <NavLink to={'/profile'}>profile </NavLink>
+            <NavLink to={'/profile/settings'}>settings </NavLink>
+
+            <Routes>
+                <Route path={'/*'} element={<div>404</div>}/>
+                <Route path={'/'} element={<div>main</div>}/>
+                <Route path={'/login'} element={<div>login</div>}/>
+                <Route path={'/profile'} element={<Profile5/>}/>
+                <Route path={'/profile/settings'} element={<div>settings</div>}/>
+            </Routes>
+        </div>
+    )
+}
+
+function Profile5() {
+    const navigate = useNavigate()
+
+    //редирект на логин если не залогинен вариант 2
+    // useEffect(() => {
+    //     if (true) navigate('/login')
+    // }, [])
+
+    return (
+        <div>
+            {/*//редирект на логин если не залогинен вариант 2*/}
+            {/*{true && <Navigate to={'/login'}/>}*/}
+
+            profile
+            <button onClick={() => {
+                navigate('/login')
+            }}>logout</button>
         </div>
     )
 }
