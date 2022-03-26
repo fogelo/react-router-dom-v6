@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import './App.css';
-import {NavLink, Route, Routes, Outlet, useParams, useNavigate, Navigate} from 'react-router-dom';
+import {NavLink, Route, Routes, Outlet, useParams, useNavigate, Navigate, useSearchParams} from 'react-router-dom';
 
 function App() {
     return (
@@ -18,7 +18,10 @@ function App() {
             {/*<Lesson4/>*/}
             <hr/>
             <h2>4</h2>
-            <Lesson5/>
+            {/*<Lesson5/>*/}
+            <hr/>
+            <h2>4</h2>
+            <Lesson6/>
         </div>
     );
 }
@@ -172,6 +175,48 @@ function Profile5() {
             <button onClick={() => {
                 navigate('/login')
             }}>logout</button>
+        </div>
+    )
+}
+
+function Lesson6() {
+    return (
+        <div>
+            <NavLink to={'/'}>main </NavLink>
+            <NavLink to={'/login'}>login </NavLink>
+            <NavLink to={'/profile'}>profile </NavLink>
+            <NavLink to={'/profile/settings'}>settings </NavLink>
+
+            <Routes>
+                <Route path={'/*'} element={<div>404</div>}/>
+                <Route path={'/'} element={<div>main</div>}/>
+                <Route path={'/login'} element={<div>login</div>}/>
+                <Route path={'/profile'} element={<Profile6/>}/>
+                <Route path={'/profile/settings'} element={<div>settings</div>}/>
+            </Routes>
+        </div>
+    )
+}
+
+function Profile6() {
+    const [searchParams, setSearchParams] = useSearchParams()
+    console.log(searchParams.get('name'))
+    console.log(Object.fromEntries(searchParams))
+
+    useEffect(() => {
+        console.log('research...')
+    }, [searchParams])
+
+    return (
+        <div>
+
+
+            profile
+            <button onClick={() => {
+                setSearchParams({age: '32'})
+            }}>
+                add age
+            </button>
         </div>
     )
 }
